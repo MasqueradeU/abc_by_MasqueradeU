@@ -1,18 +1,8 @@
 #include<iostream>
-#include<string>
 #include<vector>
-
+ 
 using namespace std;
-
-const int gray=0;
-const int brown=1;
-const int green=2;
-const int sky=3;
-const int blue=4;
-const int yellow=5;
-const int orange=6;
-const int red=7;
-
+ 
 int main(){
 	int N;
 	cin>>N;
@@ -21,24 +11,22 @@ int main(){
 		cin>>a[i];
     }
 	
-	vector <bool> color(8,false);
+	int address;
 	int over=0;
 	int min=0;
+	vector <bool> color(8,false);
 	for(int i=0 ; i<N ; i++){
-		if(a[i]>0 && a[i]<400)color[gray]=true;
-		else if(a[i]>=400 && a[i]<800)color[brown]=true;
-		else if(a[i]>=800 && a[i]<1200)color[green]=true;
-		else if(a[i]>=1200 && a[i]<1600)color[sky]=true;
-		else if(a[i]>=1600 && a[i]<2000)color[blue]=true;
-		else if(a[i]>=2000 && a[i]<2400)color[yellow]=true;
-		else if(a[i]>=2400 && a[i]<2800)color[orange]=true;
-		else if(a[i]>=2800 && a[i]<3200)color[red]=true;
-		else over++;
+		address=(int)(a[i]/400);
+		if(address>=8){
+			over+=1;
+			continue;
+		}
+		color[address]=true;
 	}
 	for(int i=0 ; i<8 ; i++){
 		if(color[i])min++;
 	}
-	if(min+over>8)cout<<min<<" "<<8<<"\n";
+	if(min==0)cout<<1<<" "<<over<<"\n";
 	else cout<<min<<" "<<min+over<<"\n";
 	return 0;
 }
