@@ -30,15 +30,18 @@ int main(){
 		neighbor[a[i]].push_back(b[i]);
 		neighbor[b[i]].push_back(a[i]);
 	}
+	//キューの準備
 	que.push(0);
 	que.push(N-1);
 	neighbor_state[0]=BLACK;
 	neighbor_state[N-1]=WHITE;
 	while(1){
 		if(que.empty())break;
+		//取り出し
 		temp=que.front();
 		que.pop();
 		for(int i=0 ; i<neighbor[temp].size() ; i++){
+			//白黒を付けておく（探索し終えた部分に該当）
 			if(neighbor_state[temp]==BLACK){
 				if(neighbor_state[neighbor[temp][i]]==NOTHING){
 					neighbor_state[neighbor[temp][i]]=BLACK;
@@ -53,6 +56,7 @@ int main(){
 			}
 		}
 	}
+	//マスのカウント
 	for(int i=0 ; i<neighbor_state.size() ; i++){
 		if(neighbor_state[i]==BLACK)black+=1;
 		else white+=1;
